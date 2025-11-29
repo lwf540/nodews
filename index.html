@@ -1,722 +1,658 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>精美相册轮换展示</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 自定义Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3b82f6',
+            secondary: '#64748b',
+            dark: '#1e293b',
+            light: '#f8fafc'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .carousel-transition {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .thumbnail-active {
+        @apply border-primary ring-2 ring-primary/50;
+      }
+      .backdrop-blur {
+        backdrop-filter: blur(8px);
+      }
+    }
+  </style>
+  
+  <style>
+    /* 基础样式 */
+    body {
+      scroll-behavior: smooth;
+    }
+    
+    /* 相册图片容器样式 */
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* 相册轨道样式 */
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* 相册图片样式 */
+    .carousel-item {
+      flex: 0 0 100%;
+      height: 100%;
+    }
+    
+    /* 淡入动画 */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    
+    /* 加载动画 */
+    .loader {
+      border-top-color: #3b82f6;
+      animation: spinner 0.8s linear infinite;
+    }
+    
+    @keyframes spinner {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
+<body class="font-inter bg-gray-50 text-dark min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <header class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-picture-o text-primary text-2xl"></i>
+        <h1 class="text-xl md:text-2xl font-bold text-dark">光影集</h1>
+      </div>
+      
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#" class="text-dark hover:text-primary transition-colors duration-300 font-medium">首页</a>
+        <a href="#gallery" class="text-dark hover:text-primary transition-colors duration-300 font-medium">相册</a>
+        <a href="#about" class="text-dark hover:text-primary transition-colors duration-300 font-medium">关于</a>
+      </nav>
+      
+      <button class="md:hidden text-dark text-xl" id="menuToggle">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div class="md:hidden bg-white shadow-lg absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none" id="mobileMenu">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+        <a href="#" class="text-dark hover:text-primary transition-colors duration-300 font-medium py-2 border-b border-gray-100">首页</a>
+        <a href="#gallery" class="text-dark hover:text-primary transition-colors duration-300 font-medium py-2 border-b border-gray-100">相册</a>
+        <a href="#about" class="text-dark hover:text-primary transition-colors duration-300 font-medium py-2">关于</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容区 -->
+  <main class="flex-grow pt-20">
+    <!-- 英雄区域 -->
+    <section class="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="https://picsum.photos/id/1039/1920/1080" alt="风景背景" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-dark/50 backdrop-blur"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 z-10 text-center text-white fade-in">
+        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4 leading-tight">珍藏美好瞬间</h2>
+        <p class="text-[clamp(1rem,2vw,1.25rem)] max-w-2xl mx-auto mb-8 text-gray-100">
+          每一张照片都是时光的见证，每一个瞬间都值得被珍藏
+        </p>
+        <a href="#gallery" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+          浏览相册 <i class="fa fa-arrow-right ml-2"></i>
+        </a>
+      </div>
     </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    
+    <!-- 相册区域 -->
+    <section id="gallery" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-dark mb-4">精美相册</h2>
+          <p class="text-secondary max-w-2xl mx-auto">
+            探索精选照片集，感受生活中的美好瞬间与精彩时刻
+          </p>
         </div>
-    </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+        
+        <!-- 相册控制器 -->
+        <div class="relative max-w-4xl mx-auto mb-8">
+          <!-- 相册主区域 -->
+          <div class="carousel-container rounded-xl overflow-hidden shadow-xl h-[400px] md:h-[500px] bg-gray-100">
+            <div class="carousel-track h-full" id="carouselTrack">
+              <!-- 相册图片1 -->
+              <div class="carousel-item">
+                <div class="relative w-full h-full">
+                  <img src="https://picsum.photos/id/1015/1200/800" alt="山川湖泊" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/80 to-transparent p-6">
+                    <h3 class="text-white text-xl font-bold">山川湖泊</h3>
+                    <p class="text-gray-200">壮丽的自然景观，心灵的净化之地</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 相册图片2 -->
+              <div class="carousel-item">
+                <div class="relative w-full h-full">
+                  <img src="https://picsum.photos/id/1018/1200/800" alt="雪山" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/80 to-transparent p-6">
+                    <h3 class="text-white text-xl font-bold">雪山之巅</h3>
+                    <p class="text-gray-200">高耸入云的雪山，纯净而庄严</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 相册图片3 -->
+              <div class="carousel-item">
+                <div class="relative w-full h-full">
+                  <img src="https://picsum.photos/id/1019/1200/800" alt="森林" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/80 to-transparent p-6">
+                    <h3 class="text-white text-xl font-bold">茂密森林</h3>
+                    <p class="text-gray-200">郁郁葱葱的绿色世界，生命的摇篮</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 相册图片4 -->
+              <div class="carousel-item">
+                <div class="relative w-full h-full">
+                  <img src="https://picsum.photos/id/1036/1200/800" alt="海边" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/80 to-transparent p-6">
+                    <h3 class="text-white text-xl font-bold">海边日落</h3>
+                    <p class="text-gray-200">金色的沙滩，绚丽的晚霞</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 相册图片5 -->
+              <div class="carousel-item">
+                <div class="relative w-full h-full">
+                  <img src="https://picsum.photos/id/1043/1200/800" alt="城市夜景" class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/80 to-transparent p-6">
+                    <h3 class="text-white text-xl font-bold">城市夜景</h3>
+                    <p class="text-gray-200">灯火辉煌的都市，现代生活的脉搏</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+            <!-- 加载指示器 -->
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-100 hidden" id="loader">
+              <div class="loader w-16 h-16 border-4 border-gray-200 rounded-full"></div>
+            </div>
+          </div>
+          
+          <!-- 左右导航按钮 -->
+          <button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white/80 hover:bg-white text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 z-10 md:translate-x-0 md:left-[-20px]" id="prevBtn">
+            <i class="fa fa-chevron-left"></i>
+          </button>
+          <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white/80 hover:bg-white text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 z-10 md:translate-x-0 md:right-[-20px]" id="nextBtn">
+            <i class="fa fa-chevron-right"></i>
+          </button>
+          
+          <!-- 指示器 -->
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+            <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300 thumbnail-active" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300" data-index="2"></button>
+            <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300" data-index="3"></button>
+            <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300" data-index="4"></button>
+          </div>
+        </div>
+        
+        <!-- 缩略图导航 -->
+        <div class="max-w-4xl mx-auto mt-8">
+          <h3 class="text-lg font-semibold mb-4 text-center">快速导航</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            <div class="thumbnail cursor-pointer overflow-hidden rounded-lg shadow-md border-2 thumbnail-active" data-index="0">
+              <img src="https://picsum.photos/id/1015/200/150" alt="缩略图1" class="w-full h-24 object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="thumbnail cursor-pointer overflow-hidden rounded-lg shadow-md border-2 border-transparent" data-index="1">
+              <img src="https://picsum.photos/id/1018/200/150" alt="缩略图2" class="w-full h-24 object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="thumbnail cursor-pointer overflow-hidden rounded-lg shadow-md border-2 border-transparent" data-index="2">
+              <img src="https://picsum.photos/id/1019/200/150" alt="缩略图3" class="w-full h-24 object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="thumbnail cursor-pointer overflow-hidden rounded-lg shadow-md border-2 border-transparent" data-index="3">
+              <img src="https://picsum.photos/id/1036/200/150" alt="缩略图4" class="w-full h-24 object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="thumbnail cursor-pointer overflow-hidden rounded-lg shadow-md border-2 border-transparent" data-index="4">
+              <img src="https://picsum.photos/id/1043/200/150" alt="缩略图5" class="w-full h-24 object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+          </div>
+        </div>
+        
+        <!-- 相册控制选项 -->
+        <div class="max-w-4xl mx-auto mt-8 flex justify-center items-center space-x-6">
+          <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-dark px-4 py-2 rounded-full transition-all duration-300" id="playPauseBtn">
+            <i class="fa fa-pause"></i>
+            <span>暂停播放</span>
+          </button>
+          <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-dark px-4 py-2 rounded-full transition-all duration-300" id="shuffleBtn">
+            <i class="fa fa-random"></i>
+            <span>随机播放</span>
+          </button>
+          <div class="flex items-center space-x-2">
+            <label for="transitionSpeed" class="text-dark">切换速度:</label>
+            <select id="transitionSpeed" class="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50">
+              <option value="2000">快 (2秒)</option>
+              <option value="5000" selected>中 (5秒)</option>
+              <option value="8000">慢 (8秒)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 关于区域 -->
+    <section id="about" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-dark mb-6">关于相册</h2>
+          <p class="text-secondary mb-8 leading-relaxed">
+            这是一个精心设计的相册轮换展示页面，专注于呈现照片的美感与故事性。
+            我们提供流畅的浏览体验，支持多种交互方式，让您轻松欣赏每一张珍贵照片。
+            无论是自然风光、城市景观还是生活瞬间，都能在这里得到完美展示。
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-images text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">精美展示</h3>
+              <p class="text-secondary">高质量图片展示，突出照片细节与色彩</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-sliders text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">灵活控制</h3>
+              <p class="text-secondary">多种切换方式，自定义播放速度与模式</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-mobile text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">响应式设计</h3>
+              <p class="text-secondary">完美适配手机、平板与桌面设备</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fa fa-picture-o text-primary text-2xl"></i>
+            <h3 class="text-xl font-bold">光影集</h3>
+          </div>
+          <p class="text-gray-400 mb-4">
+            珍藏生活中的每一个美好瞬间，让记忆永存
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">
+              <i class="fa fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">首页</a></li>
+            <li><a href="#gallery" class="text-gray-400 hover:text-white transition-colors duration-300">相册</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">关于</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">订阅更新</h3>
+          <p class="text-gray-400 mb-4">
+            订阅我们的通讯，获取最新相册更新和摄影技巧
+          </p>
+          <form class="flex">
+            <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-dark">
+            <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors duration-300">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+        <p>&copy; 2024 光影集. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+  <!-- 图片预览模态框 -->
+  <div class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" id="previewModal">
+    <button class="absolute top-6 right-6 text-white text-3xl hover:text-gray-300 transition-colors duration-300" id="closeModal">
+      <i class="fa fa-times"></i>
+    </button>
+    
+    <div class="container mx-auto px-4 max-w-5xl">
+      <div class="relative">
+        <img src="" alt="预览图片" class="w-full h-auto max-h-[80vh] object-contain" id="previewImage">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
+          <h3 class="text-xl font-bold" id="previewTitle">图片标题</h3>
+          <p class="text-gray-200" id="previewDescription">图片描述</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript 代码 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 全局变量
+      const carouselTrack = document.getElementById('carouselTrack');
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const indicators = document.querySelectorAll('[data-index]');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const shuffleBtn = document.getElementById('shuffleBtn');
+      const transitionSpeedSelect = document.getElementById('transitionSpeed');
+      const loader = document.getElementById('loader');
+      const previewModal = document.getElementById('previewModal');
+      const previewImage = document.getElementById('previewImage');
+      const previewTitle = document.getElementById('previewTitle');
+      const previewDescription = document.getElementById('previewDescription');
+      const closeModal = document.getElementById('closeModal');
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const navbar = document.getElementById('navbar');
+      
+      let currentIndex = 0;
+      let isPlaying = true;
+      let isShuffling = false;
+      let slideInterval;
+      let slideSpeed = parseInt(transitionSpeedSelect.value);
+      
+      // 初始化轮播
+      initCarousel();
+      
+      // 初始化函数
+      function initCarousel() {
+        // 设置自动播放
+        startSlideInterval();
+        
+        // 事件监听
+        prevBtn.addEventListener('click', showPrevSlide);
+        nextBtn.addEventListener('click', showNextSlide);
+        indicators.forEach(indicator => {
+          indicator.addEventListener('click', () => goToSlide(parseInt(indicator.dataset.index)));
         });
-    </script>
+        thumbnails.forEach(thumbnail => {
+          thumbnail.addEventListener('click', () => goToSlide(parseInt(thumbnail.dataset.index)));
+        });
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        shuffleBtn.addEventListener('click', toggleShuffle);
+        transitionSpeedSelect.addEventListener('change', updateSlideSpeed);
+        carouselItems.forEach(item => {
+          item.addEventListener('click', () => openPreview(currentIndex));
+        });
+        closeModal.addEventListener('click', closePreview);
+        previewModal.addEventListener('click', (e) => {
+          if (e.target === previewModal) closePreview();
+        });
+        menuToggle.addEventListener('click', toggleMobileMenu);
+        
+        // 滚动事件监听（导航栏样式变化）
+        window.addEventListener('scroll', handleScroll);
+      }
+      
+      // 显示上一张幻灯片
+      function showPrevSlide() {
+        if (isShuffling) {
+          goToRandomSlide();
+        } else {
+          currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+          updateCarousel();
+        }
+      }
+      
+      // 显示下一张幻灯片
+      function showNextSlide() {
+        if (isShuffling) {
+          goToRandomSlide();
+        } else {
+          currentIndex = (currentIndex + 1) % carouselItems.length;
+          updateCarousel();
+        }
+      }
+      
+      // 跳转到指定幻灯片
+      function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+      }
+      
+      // 跳转到随机幻灯片
+      function goToRandomSlide() {
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * carouselItems.length);
+        } while (newIndex === currentIndex && carouselItems.length > 1);
+        currentIndex = newIndex;
+        updateCarousel();
+      }
+      
+      // 更新轮播状态
+      function updateCarousel() {
+        // 显示加载状态
+        showLoader();
+        
+        // 延迟更新，模拟加载时间
+        setTimeout(() => {
+          // 更新轨道位置
+          carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+          
+          // 更新指示器状态
+          indicators.forEach((indicator, index) => {
+            if (index === currentIndex) {
+              indicator.classList.add('thumbnail-active');
+            } else {
+              indicator.classList.remove('thumbnail-active');
+            }
+          });
+          
+          // 更新缩略图状态
+          thumbnails.forEach((thumbnail, index) => {
+            if (index === currentIndex) {
+              thumbnail.classList.add('thumbnail-active');
+            } else {
+              thumbnail.classList.remove('thumbnail-active');
+            }
+          });
+          
+          // 隐藏加载状态
+          hideLoader();
+        }, 300);
+      }
+      
+      // 开始自动播放
+      function startSlideInterval() {
+        if (slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(showNextSlide, slideSpeed);
+      }
+      
+      // 暂停自动播放
+      function stopSlideInterval() {
+        clearInterval(slideInterval);
+      }
+      
+      // 切换播放/暂停状态
+      function togglePlayPause() {
+        isPlaying = !isPlaying;
+        
+        if (isPlaying) {
+          playPauseBtn.innerHTML = '<i class="fa fa-pause"></i><span>暂停播放</span>';
+          startSlideInterval();
+        } else {
+          playPauseBtn.innerHTML = '<i class="fa fa-play"></i><span>开始播放</span>';
+          stopSlideInterval();
+        }
+      }
+      
+      // 切换随机播放状态
+      function toggleShuffle() {
+        isShuffling = !isShuffling;
+        
+        if (isShuffling) {
+          shuffleBtn.classList.add('bg-primary', 'text-white');
+          shuffleBtn.classList.remove('bg-gray-100', 'text-dark');
+        } else {
+          shuffleBtn.classList.remove('bg-primary', 'text-white');
+          shuffleBtn.classList.add('bg-gray-100', 'text-dark');
+        }
+      }
+      
+      // 更新播放速度
+      function updateSlideSpeed() {
+        slideSpeed = parseInt(transitionSpeedSelect.value);
+        
+        if (isPlaying) {
+          startSlideInterval();
+        }
+      }
+      
+      // 显示加载指示器
+      function showLoader() {
+        loader.classList.remove('hidden');
+      }
+      
+      // 隐藏加载指示器
+      function hideLoader() {
+        loader.classList.add('hidden');
+      }
+      
+      // 打开图片预览
+      function openPreview(index) {
+        const currentItem = carouselItems[index];
+        const imgSrc = currentItem.querySelector('img').src;
+        const title = currentItem.querySelector('h3').textContent;
+        const description = currentItem.querySelector('p').textContent;
+        
+        previewImage.src = imgSrc;
+        previewTitle.textContent = title;
+        previewDescription.textContent = description;
+        
+        previewModal.classList.remove('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'hidden';
+        
+        // 暂停轮播
+        if (isPlaying) {
+          togglePlayPause();
+        }
+      }
+      
+      // 关闭图片预览
+      function closePreview() {
+        previewModal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = '';
+      }
+      
+      // 切换移动端菜单
+      function toggleMobileMenu() {
+        if (mobileMenu.classList.contains('opacity-0')) {
+          mobileMenu.classList.remove('opacity-0', '-translate-y-full', 'pointer-events-none');
+          menuToggle.innerHTML = '<i class="fa fa-times"></i>';
+        } else {
+          mobileMenu.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
+          menuToggle.innerHTML = '<i class="fa fa-bars"></i>';
+        }
+      }
+      
+      // 处理滚动事件（导航栏样式变化）
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          navbar.classList.add('py-2', 'shadow-lg');
+          navbar.classList.remove('py-3', 'shadow-md');
+        } else {
+          navbar.classList.add('py-3', 'shadow-md');
+          navbar.classList.remove('py-2', 'shadow-lg');
+        }
+      }
+      
+      // 键盘导航支持
+      document.addEventListener('keydown', (e) => {
+        if (previewModal.classList.contains('opacity-0')) {
+          // 不在预览模式时，方向键控制轮播
+          if (e.key === 'ArrowLeft') showPrevSlide();
+          if (e.key === 'ArrowRight') showNextSlide();
+        } else {
+          // 在预览模式时，方向键切换图片，ESC关闭预览
+          if (e.key === 'ArrowLeft') {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            openPreview(currentIndex);
+          }
+          if (e.key === 'ArrowRight') {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            openPreview(currentIndex);
+          }
+          if (e.key === 'Escape') closePreview();
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>
